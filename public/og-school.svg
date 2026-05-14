@@ -1,0 +1,18 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0D4F3C"/>
+  <rect x="54" y="54" width="1092" height="522" rx="36" fill="url(#paint0_linear)"/>
+  <circle cx="980" cy="138" r="94" fill="#C9A84C" fill-opacity="0.22"/>
+  <circle cx="165" cy="493" r="124" fill="#F5F0E0" fill-opacity="0.12"/>
+  <path d="M188 221H1012" stroke="#F5F0E0" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M188 414H692" stroke="#F5F0E0" stroke-opacity="0.18" stroke-width="2"/>
+  <text x="188" y="190" fill="#F5F0E0" font-size="34" font-family="Inter, Arial, sans-serif" letter-spacing="10">RUMI ACADEMIC SCHOOL</text>
+  <text x="188" y="318" fill="#F5F0E0" font-size="78" font-weight="700" font-family="Inter, Arial, sans-serif">Knowledge. Character.</text>
+  <text x="188" y="394" fill="#F5F0E0" font-size="78" font-weight="700" font-family="Inter, Arial, sans-serif">Future.</text>
+  <text x="188" y="470" fill="#F5F0E0" fill-opacity="0.76" font-size="32" font-family="Inter, Arial, sans-serif">Multilingual education for primary, middle, and high school learners.</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="54" y1="54" x2="1146" y2="576" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#124E3D"/>
+      <stop offset="1" stop-color="#1D6A55"/>
+    </linearGradient>
+  </defs>
+</svg>
