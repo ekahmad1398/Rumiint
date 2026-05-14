@@ -207,7 +207,7 @@ const galleryCatalog = [
 ]
 
 const eventSources = [{
-        date: '2026-05-28',
+        date: '2025-05-28',
         titleEn: 'Family Open House',
         titleFa: 'روز بازدید خانواده‌ها',
         descriptionEn: 'Prospective families are invited to visit classrooms, meet teachers, and explore the campus environment.',
@@ -216,7 +216,7 @@ const eventSources = [{
         locationFa: 'کمپ اصلی، تایمنی',
     },
     {
-        date: '2026-06-18',
+        date: '2025-06-18',
         titleEn: 'Student Achievement Showcase',
         titleFa: 'نمایش دستاوردهای شاگردان',
         descriptionEn: 'Students will present academic projects, science work, and creative learning activities to families and guests.',
@@ -225,7 +225,7 @@ const eventSources = [{
         locationFa: 'تالار مکتب',
     },
     {
-        date: '2026-08-20',
+        date: '2024-08-20',
         titleEn: 'New Term Orientation',
         titleFa: 'آشنایی با ترم جدید',
         descriptionEn: 'A welcome session for students and parents covering routines, expectations, and support services for the new term.',
@@ -234,7 +234,7 @@ const eventSources = [{
         locationFa: 'سالن اجتماعات',
     },
     {
-        date: '2026-09-05',
+        date: '2024-09-05',
         titleEn: 'Parent Partnership Meeting',
         titleFa: 'نشست همکاری با والدین',
         descriptionEn: 'Families and school leadership will discuss student growth, communication, and shared goals for the academic year.',
