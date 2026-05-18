@@ -1,51 +1,78 @@
+import OptimizedImage from '../components/OptimizedImage'
+import { Reveal, Stagger } from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import { useLanguage } from '../contexts/LanguageContext'
 
-function formatEventDate(dateString, language) {
-  return new Intl.DateTimeFormat(language === 'fa' ? 'fa-AF' : 'en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(dateString))
-}
-
 export default function EventsPage() {
-  const { t, language } = useLanguage()
-  const events = t('events.items')
+  const { t } = useLanguage()
+  const featured = t('events.featured')
+  const highlights = t('events.highlights')
 
   return (
     <div className="page-enter px-4 pb-8 pt-10">
       <section className="mx-auto max-w-7xl">
-        <SectionHeading
-          align="center"
-          description={t('events.description')}
-          eyebrow={t('events.eyebrow')}
-          title={t('events.title')}
-        />
+        <Reveal>
+          <SectionHeading
+            align="center"
+            description={t('events.description')}
+            eyebrow={t('events.eyebrow')}
+            title={t('events.title')}
+            titleClassName="event-page-heading"
+          />
+        </Reveal>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="surface-card-strong overflow-hidden">
-            <img
-              alt={t('events.imageAlt')}
-              className="h-full min-h-[320px] w-full object-cover"
-              src="/gallery/ceremony-01.jpg"
-            />
-          </div>
-
-          <div className="relative space-y-5 before:absolute before:start-[1.35rem] before:top-6 before:h-[calc(100%-3rem)] before:w-px before:bg-cyan-200 dark:before:bg-cyan-500/20">
-            {events.map((event) => (
-              <article key={event.date + event.title} className="surface-card relative ps-16 p-6">
-                <span className="absolute start-4 top-7 h-3 w-3 rounded-full bg-brand-sky" />
-                <p className="eyebrow">{formatEventDate(event.date, language)}</p>
-                <h3 className="mt-3 text-2xl font-extrabold">{event.title}</h3>
-                <p className="mt-3 text-sm leading-7" style={{ color: 'var(--text-soft)' }}>
-                  {event.description}
+        <Reveal delay={0.05} distance={24}>
+          <article className="event-feature-shell mt-10 overflow-hidden">
+            <div className="grid gap-0 lg:grid-cols-[0.92fr_1.08fr]">
+              <div className="event-feature-copy p-8 md:p-10">
+                <span className="gallery-category-pill">{featured.category}</span>
+                <h3 className="mt-5 text-3xl font-black tracking-tight md:text-[2.55rem]">
+                  {featured.title}
+                </h3>
+                <p className="mt-5 max-w-2xl text-base leading-8 md:text-lg" style={{ color: 'var(--text-soft)' }}>
+                  {featured.description}
                 </p>
-                <p className="mt-4 text-sm font-bold text-brand-sky">{event.location}</p>
+              </div>
+              <div className="event-feature-media p-4 md:p-5">
+                <OptimizedImage
+                  alt={featured.imageAlt}
+                  className="h-full min-h-[340px] w-full rounded-[28px] object-cover"
+                  priority
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  src={featured.image}
+                  style={{ objectPosition: featured.position }}
+                />
+              </div>
+            </div>
+          </article>
+        </Reveal>
+
+        <Stagger className="mt-8 grid gap-6 md:grid-cols-2" delayChildren={0.05} staggerChildren={0.07}>
+          {highlights.map((event) => (
+            <Reveal key={event.title} distance={20}>
+              <article className="surface-card event-card overflow-hidden">
+                <div className="p-3">
+                  <div className="event-card-media overflow-hidden rounded-[24px]">
+                    <OptimizedImage
+                      alt={event.imageAlt}
+                      className="h-64 w-full object-cover"
+                      sizes="(min-width: 768px) 45vw, 100vw"
+                      src={event.image}
+                      style={{ objectPosition: event.position }}
+                    />
+                  </div>
+                </div>
+                <div className="px-6 pb-6 pt-2">
+                  <span className="gallery-category-pill">{event.category}</span>
+                  <h3 className="mt-4 text-2xl font-black">{event.title}</h3>
+                  <p className="mt-3 text-sm leading-7 md:text-base" style={{ color: 'var(--text-soft)' }}>
+                    {event.description}
+                  </p>
+                </div>
               </article>
-            ))}
-          </div>
-        </div>
+            </Reveal>
+          ))}
+        </Stagger>
       </section>
     </div>
   )

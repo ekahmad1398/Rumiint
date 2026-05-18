@@ -1,69 +1,137 @@
-import { useEffect } from 'react'
-import { FiX } from 'react-icons/fi'
+import { useEffect, useRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi'
 
+import OptimizedImage from './OptimizedImage'
 import { useLanguage } from '../contexts/LanguageContext'
 
-export default function Lightbox({ item, onClose }) {
+export default function Lightbox({ items = [], selectedIndex, onClose, onNext, onPrevious }) {
   const { t } = useLanguage()
+  const touchStartX = useRef(0)
+  const item = selectedIndex == null ? null : items[selectedIndex]
 
   useEffect(() => {
     if (!item) {
       return undefined
     }
 
-    const handleEscape = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         onClose()
+      }
+
+      if (event.key === 'ArrowRight') {
+        onNext()
+      }
+
+      if (event.key === 'ArrowLeft') {
+        onPrevious()
       }
     }
 
     const previousOverflow = document.body.style.overflow
-
-    document.addEventListener('keydown', handleEscape)
     document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [item, onClose])
-
-  if (!item) {
-    return null
-  }
+  }, [item, onClose, onNext, onPrevious])
 
   return (
-    <div
-      aria-modal="true"
-      className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
-      role="dialog"
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-5xl overflow-hidden rounded-[28px] border bg-white shadow-2xl dark:bg-slate-950"
-        onClick={(event) => event.stopPropagation()}
-        style={{ borderColor: 'var(--border)' }}
-      >
-        <button
-          aria-label={t('common.close')}
-          className="icon-button absolute end-4 top-4 z-10"
+    <AnimatePresence>
+      {item ? (
+        <motion.div
+          animate={{ opacity: 1 }}
+          aria-modal="true"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/84 p-4 backdrop-blur-md"
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          role="dialog"
+          transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
           onClick={onClose}
-          type="button"
         >
-          <FiX />
-        </button>
-        <img
-          alt={item.alt}
-          className="max-h-[78vh] w-full object-contain bg-slate-100 dark:bg-slate-900"
-          src={item.src}
-        />
-        <div className="px-6 py-5">
-          <p className="text-lg font-bold">{item.caption}</p>
-          <p className="mt-2 text-sm leading-7" style={{ color: 'var(--text-soft)' }}>
-            {item.alt}
-          </p>
-        </div>
-      </div>
-    </div>
+          <motion.div
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="lightbox-shell relative w-full max-w-6xl overflow-hidden rounded-[32px] border"
+            exit={{ opacity: 0, scale: 0.97, y: 18 }}
+            initial={{ opacity: 0, scale: 0.97, y: 18 }}
+            style={{ borderColor: 'var(--border)' }}
+            transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(event) => event.stopPropagation()}
+            onTouchEnd={(event) => {
+              const delta = event.changedTouches[0].clientX - touchStartX.current
+
+              if (Math.abs(delta) < 50) {
+                return
+              }
+
+              if (delta < 0) {
+                onNext()
+              } else {
+                onPrevious()
+              }
+            }}
+            onTouchStart={(event) => {
+              touchStartX.current = event.touches[0].clientX
+            }}
+          >
+            <button
+              aria-label={t('common.close')}
+              className="icon-button absolute end-4 top-4 z-20"
+              onClick={onClose}
+              type="button"
+            >
+              <FiX />
+            </button>
+
+            {items.length > 1 ? (
+              <>
+                <button
+                  aria-label={t('common.previous')}
+                  className="lightbox-nav-button absolute start-4 top-1/2 z-20 -translate-y-1/2"
+                  onClick={onPrevious}
+                  type="button"
+                >
+                  <FiChevronLeft />
+                </button>
+                <button
+                  aria-label={t('common.next')}
+                  className="lightbox-nav-button absolute end-4 top-1/2 z-20 -translate-y-1/2"
+                  onClick={onNext}
+                  type="button"
+                >
+                  <FiChevronRight />
+                </button>
+              </>
+            ) : null}
+
+            <div className="lightbox-image-shell px-4 pb-2 pt-16 md:px-6">
+              <OptimizedImage
+                alt={item.alt}
+                className="max-h-[74vh] w-full rounded-[24px] object-contain"
+                loading="eager"
+                priority
+                src={item.src}
+              />
+            </div>
+
+            <div className="border-t px-5 py-5 md:px-6" style={{ borderColor: 'var(--border)' }}>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="gallery-category-pill">{item.category}</span>
+                <span className="text-sm font-semibold" style={{ color: 'var(--text-soft)' }}>
+                  {selectedIndex + 1} / {items.length}
+                </span>
+              </div>
+              <p className="mt-4 text-xl font-black md:text-2xl">{item.caption}</p>
+              <p className="mt-3 max-w-3xl text-sm leading-7 md:text-base" style={{ color: 'var(--text-soft)' }}>
+                {item.description}
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   )
 }

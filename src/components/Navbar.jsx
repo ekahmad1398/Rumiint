@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import { FiGlobe, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi'
 
+import OptimizedImage from './OptimizedImage'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 
@@ -12,6 +14,11 @@ const navItems = [
   { path: '/events', key: 'events' },
   { path: '/faq', key: 'faq' },
 ]
+
+const mobileMenuTransition = {
+  duration: 0.36,
+  ease: [0.22, 1, 0.36, 1],
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -53,20 +60,18 @@ export default function Navbar() {
     }
   }, [])
 
-  const navLinkClassName = ({ isActive }) =>
-    `page-link ${isActive ? 'page-link-active' : ''}`
+  const navLinkClassName = ({ isActive }) => `page-link ${isActive ? 'page-link-active' : ''}`
 
   return (
     <header className="sticky top-0 z-[60] px-4 pt-3">
-      <div
-        className={`navbar-shell mx-auto max-w-7xl ${isScrolled ? 'navbar-shell-scrolled' : ''}`}
-      >
+      <div className={`navbar-shell mx-auto max-w-7xl ${isScrolled ? 'navbar-shell-scrolled' : ''}`}>
         <div className="flex items-center justify-between gap-4 px-5 py-4 lg:px-7">
           <NavLink className="flex min-w-0 items-center gap-3" to="/">
             <span className="navbar-logo-shell">
-              <img
+              <OptimizedImage
                 alt="Rumi International School logo"
                 className="h-12 w-12 shrink-0 object-contain"
+                priority
                 src="/rumi-logo-clean.png"
               />
             </span>
@@ -74,9 +79,7 @@ export default function Navbar() {
               <p className="truncate text-sm font-black uppercase tracking-[0.28em] text-brand-sky">
                 Rumi
               </p>
-              <p className="truncate text-sm font-semibold md:text-base">
-                {t('brand.full')}
-              </p>
+              <p className="truncate text-sm font-semibold md:text-base">{t('brand.full')}</p>
             </div>
           </NavLink>
 
@@ -143,67 +146,113 @@ export default function Navbar() {
           </button>
         </div>
 
-        <div
-          className={`navbar-menu overflow-hidden border-t lg:hidden ${
-            isMenuOpen ? 'navbar-menu-open' : 'navbar-menu-closed'
-          }`}
-          style={{ borderColor: 'var(--border)' }}
-        >
-          <div className="px-5 pb-5 pt-4">
-            <nav className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.key}
-                  className={navLinkClassName}
-                  end={item.path === '/'}
-                  to={item.path}
-                >
-                  {t(`nav.${item.key}`)}
-                </NavLink>
-              ))}
-            </nav>
-
-            <div className={`mt-4 flex gap-3 ${isRTL ? 'justify-end' : 'justify-start'}`}>
-              <button
-                aria-label={t('nav.toggleLanguage')}
-                className="language-toggle"
-                onClick={toggleLanguage}
-                type="button"
-              >
-                <span className="language-toggle-icon">
-                  <FiGlobe className="h-4 w-4" />
-                </span>
-                <span dir="ltr">
-                  <span className={`language-chip ${language === 'en' ? 'language-chip-active' : ''}`}>
-                    EN
-                  </span>
-                  <span className="px-1 text-slate-400">/</span>
-                  <span className={`language-chip ${language === 'fa' ? 'language-chip-active' : ''}`}>
-                    FA
-                  </span>
-                </span>
-              </button>
-
-              <button
-                aria-label={t('nav.toggleTheme')}
-                className="icon-button text-lg"
-                onClick={toggleTheme}
-                type="button"
-              >
-                {theme === 'light' ? <FiMoon /> : <FiSun />}
-              </button>
-            </div>
-
-            <a
-              className="portal-button mt-4 w-full"
-              href="https://portal.rumiint.com"
-              rel="noopener noreferrer"
-              target="_blank"
+        <AnimatePresence initial={false}>
+          {isMenuOpen ? (
+            <motion.div
+              animate={{ height: 'auto', opacity: 1 }}
+              className="overflow-hidden border-t lg:hidden"
+              exit={{ height: 0, opacity: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              style={{ borderColor: 'var(--border)' }}
+              transition={mobileMenuTransition}
             >
-              {t('nav.portal')}
-            </a>
-          </div>
-        </div>
+              <motion.div
+                animate="visible"
+                className="px-5 pb-5 pt-4"
+                initial="hidden"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { delayChildren: 0.04, staggerChildren: 0.05 },
+                  },
+                }}
+              >
+                <nav className="flex flex-col gap-2">
+                  {navItems.map((item) => (
+                    <motion.div
+                      key={item.key}
+                      variants={{
+                        hidden: { opacity: 0, y: 12 },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }}
+                    >
+                      <NavLink
+                        className={navLinkClassName}
+                        end={item.path === '/'}
+                        to={item.path}
+                      >
+                        {t(`nav.${item.key}`)}
+                      </NavLink>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                <motion.div
+                  className={`mt-4 flex gap-3 ${isRTL ? 'justify-end' : 'justify-start'}`}
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                    },
+                  }}
+                >
+                  <button
+                    aria-label={t('nav.toggleLanguage')}
+                    className="language-toggle"
+                    onClick={toggleLanguage}
+                    type="button"
+                  >
+                    <span className="language-toggle-icon">
+                      <FiGlobe className="h-4 w-4" />
+                    </span>
+                    <span dir="ltr">
+                      <span className={`language-chip ${language === 'en' ? 'language-chip-active' : ''}`}>
+                        EN
+                      </span>
+                      <span className="px-1 text-slate-400">/</span>
+                      <span className={`language-chip ${language === 'fa' ? 'language-chip-active' : ''}`}>
+                        FA
+                      </span>
+                    </span>
+                  </button>
+
+                  <button
+                    aria-label={t('nav.toggleTheme')}
+                    className="icon-button text-lg"
+                    onClick={toggleTheme}
+                    type="button"
+                  >
+                    {theme === 'light' ? <FiMoon /> : <FiSun />}
+                  </button>
+                </motion.div>
+
+                <motion.a
+                  className="portal-button mt-4 w-full"
+                  href="https://portal.rumiint.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  variants={{
+                    hidden: { opacity: 0, y: 14 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                    },
+                  }}
+                >
+                  {t('nav.portal')}
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
     </header>
   )
