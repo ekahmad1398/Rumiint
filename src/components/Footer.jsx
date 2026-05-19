@@ -106,7 +106,7 @@ export default function Footer() {
                     <div className="space-y-2">
                       <p className="text-sm font-bold">{t('footer.addressLabel')}</p>
                       <p className="text-sm leading-7" style={{ color: 'var(--text-soft)' }}>
-                        4th Street of Project Taimani, Kabul, Afghanistan
+                        {t('footer.address')}
                       </p>
                       <a
                         className="inline-flex text-sm font-bold text-brand-sky"
