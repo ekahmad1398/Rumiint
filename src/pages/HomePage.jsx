@@ -125,7 +125,7 @@ export default function HomePage() {
             <div className="surface-card-strong hero-media-panel overflow-hidden">
               <OptimizedImage
                 alt={t('home.heroImageAlt')}
-                className="hero-media-image-cover h-full min-h-[360px] w-full object-cover"
+                className="hero-media-image-cover h-auto w-full object-contain sm:h-full sm:min-h-[360px] sm:object-cover"
                 priority
                 sizes="(min-width: 1024px) 44vw, 100vw"
                 src="/highlights/sat-success.jpg"
