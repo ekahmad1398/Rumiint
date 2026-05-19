@@ -585,6 +585,8 @@
   .lightbox-shell {
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 0 35px 90px rgba(2, 10, 24, 0.38);
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
 
   .dark .lightbox-shell {
@@ -620,6 +622,60 @@
   .dark .lightbox-nav-button {
     background: rgba(17, 31, 58, 0.92);
     border-color: rgba(173, 201, 234, 0.18);
+  }
+
+  .faq-item {
+    border-color: rgba(15, 30, 74, 0.08);
+  }
+
+  .dark .faq-item {
+    border-color: rgba(173, 201, 234, 0.12);
+  }
+
+  .faq-trigger {
+    transition:
+      background-color 220ms var(--ease-smooth),
+      color 220ms var(--ease-smooth);
+  }
+
+  .faq-trigger:hover {
+    background: rgba(31, 169, 200, 0.05);
+  }
+
+  .dark .faq-trigger:hover {
+    background: rgba(89, 199, 216, 0.08);
+  }
+
+  .faq-chevron {
+    transition: transform 240ms var(--ease-smooth);
+  }
+
+  .faq-chevron-open {
+    transform: rotate(180deg);
+  }
+
+  .faq-content {
+    overflow: hidden;
+  }
+
+  .faq-content[data-state='open'] {
+    animation: faq-slide-down 260ms var(--ease-smooth);
+  }
+
+  .faq-content[data-state='closed'] {
+    animation: faq-slide-up 220ms var(--ease-smooth);
+  }
+
+  .faq-content-inner {
+    will-change: opacity, transform;
+  }
+
+  .faq-content[data-state='open'] .faq-content-inner {
+    animation: faq-fade-in 240ms var(--ease-smooth);
+  }
+
+  .faq-content[data-state='closed'] .faq-content-inner {
+    animation: faq-fade-out 180ms var(--ease-smooth);
   }
 
   .event-page-heading {
@@ -750,6 +806,50 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes faq-slide-down {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes faq-slide-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@keyframes faq-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes faq-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-3px);
   }
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import * as Accordion from '@radix-ui/react-accordion'
 import { FiChevronDown } from 'react-icons/fi'
 
 import { Reveal, Stagger } from '../components/Reveal'
@@ -9,7 +9,7 @@ import { useLanguage } from '../contexts/LanguageContext'
 export default function FAQPage() {
   const { t } = useLanguage()
   const items = t('faq.items')
-  const [openIndex, setOpenIndex] = useState(0)
+  const [openItem, setOpenItem] = useState('item-0')
 
   return (
     <div className="page-enter px-4 pb-8 pt-10">
@@ -23,40 +23,46 @@ export default function FAQPage() {
           />
         </Reveal>
 
-        <Stagger className="mt-10 space-y-4" delayChildren={0.04} staggerChildren={0.05}>
-          {items.map((item, index) => {
-            const isOpen = openIndex === index
+        <Accordion.Root
+          collapsible
+          className="mt-10"
+          type="single"
+          value={openItem}
+          onValueChange={setOpenItem}
+        >
+          <Stagger className="space-y-4" delayChildren={0.04} staggerChildren={0.05}>
+            {items.map((item, index) => {
+              const itemValue = `item-${index}`
+              const isOpen = openItem === itemValue
 
-            return (
-              <Reveal key={item.question} distance={16}>
-                <article className="surface-card overflow-hidden">
-                  <button
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-start"
-                    onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                    type="button"
+              return (
+                <Reveal key={item.question} distance={16}>
+                  <Accordion.Item
+                    className="surface-card faq-item overflow-hidden"
+                    value={itemValue}
                   >
-                    <span className="text-lg font-extrabold">{item.question}</span>
-                    <FiChevronDown
-                      className={`h-5 w-5 shrink-0 transition ${isOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  <motion.div
-                    animate={{ gridTemplateRows: isOpen ? '1fr' : '0fr', opacity: isOpen ? 1 : 0.7 }}
-                    className="grid"
-                    initial={false}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 pb-6 text-sm leading-8" style={{ color: 'var(--text-soft)' }}>
-                        {item.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                </article>
-              </Reveal>
-            )
-          })}
-        </Stagger>
+                    <Accordion.Header>
+                      <Accordion.Trigger className="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start">
+                        <span className="text-lg font-extrabold">{item.question}</span>
+                        <FiChevronDown
+                          className={`faq-chevron h-5 w-5 shrink-0 ${isOpen ? 'faq-chevron-open' : ''}`}
+                        />
+                      </Accordion.Trigger>
+                    </Accordion.Header>
+
+                    <Accordion.Content className="faq-content">
+                      <div className="faq-content-inner px-6 pb-6">
+                        <p className="text-sm leading-8" style={{ color: 'var(--text-soft)' }}>
+                          {item.answer}
+                        </p>
+                      </div>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                </Reveal>
+              )
+            })}
+          </Stagger>
+        </Accordion.Root>
       </section>
     </div>
   )
