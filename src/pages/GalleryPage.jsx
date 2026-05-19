@@ -8,10 +8,10 @@ import SectionHeading from '../components/SectionHeading'
 import { useLanguage } from '../contexts/LanguageContext'
 
 const ratioClasses = {
-  portrait: 'aspect-[4/5]',
-  square: 'aspect-square',
-  landscape: 'aspect-[4/3]',
-  wide: 'aspect-[16/10]',
+  portrait: 'aspect-auto sm:aspect-[4/5]',
+  square: 'aspect-auto sm:aspect-square',
+  landscape: 'aspect-auto sm:aspect-[4/3]',
+  wide: 'aspect-auto sm:aspect-[16/10]',
 }
 
 function getRatioClass(ratio = 'portrait') {
@@ -155,7 +155,7 @@ export default function GalleryPage() {
                       <div className={`gallery-frame ${getRatioClass(item.ratio)}`}>
                         <OptimizedImage
                           alt={item.alt}
-                          className="gallery-photo h-full w-full object-cover"
+                          className="gallery-photo h-auto w-full object-cover sm:h-full"
                           sizes="(min-width: 1536px) 23vw, (min-width: 1280px) 30vw, (min-width: 640px) 45vw, 92vw"
                           src={item.src}
                           style={{ objectPosition: item.position }}

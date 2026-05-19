@@ -185,7 +185,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <FaHeart />
+                <FaHeart className="footer-heart-icon" />
               </a>
             </div>
           </div>

@@ -14,10 +14,10 @@ import SectionHeading from '../components/SectionHeading'
 import { useLanguage } from '../contexts/LanguageContext'
 
 const ratioClasses = {
-  portrait: 'aspect-[4/5]',
-  square: 'aspect-square',
-  landscape: 'aspect-[4/3]',
-  wide: 'aspect-[16/10]',
+  portrait: 'aspect-auto sm:aspect-[4/5]',
+  square: 'aspect-auto sm:aspect-square',
+  landscape: 'aspect-auto sm:aspect-[4/3]',
+  wide: 'aspect-auto sm:aspect-[16/10]',
 }
 
 const layoutClasses = {
@@ -255,7 +255,7 @@ export default function HomePage() {
                   <div className={`overflow-hidden ${getRatioClass(item.ratio)}`}>
                     <OptimizedImage
                       alt={item.alt}
-                      className="h-full w-full object-cover transition duration-500 hover:scale-[1.04]"
+                      className="h-auto w-full object-cover transition duration-500 hover:scale-[1.04] sm:h-full"
                       sizes="(min-width: 1024px) 22vw, (min-width: 640px) 42vw, 100vw"
                       src={item.src}
                       style={{ objectPosition: item.position }}
