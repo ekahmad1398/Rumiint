@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/gallery",
+      "destination": "/photos",
+      "permanent": false
+    },
+    {
+      "source": "/programs",
+      "destination": "/photos",
+      "permanent": false
+    },
+    {
+      "source": "/news",
+      "destination": "/events",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import {
 import OptimizedImage from './OptimizedImage'
 import { Reveal, Stagger } from './Reveal'
 import { useLanguage } from '../contexts/LanguageContext'
+import { contactEmail, siteDomain, siteUrl } from '../siteConfig'
 
 const socialLinks = [
   {
@@ -82,7 +83,7 @@ export default function Footer() {
                 <Reveal delay={0.16}>
                   <a
                     className="surface-card footer-info-card flex items-center gap-4 p-4"
-                    href="mailto:info@rumiint.com"
+                    href={`mailto:${contactEmail}`}
                   >
                     <span className="icon-button h-12 w-12 shrink-0">
                       <FaEnvelope />
@@ -90,7 +91,7 @@ export default function Footer() {
                     <div>
                       <p className="text-sm font-bold">{t('footer.emailLabel')}</p>
                       <p className="text-sm" style={{ color: 'var(--text-soft)' }}>
-                        info@rumiint.com
+                        {contactEmail}
                       </p>
                     </div>
                   </a>
@@ -125,11 +126,11 @@ export default function Footer() {
                     <span className="text-sm font-bold">{t('footer.websiteLabel')}</span>
                     <a
                       className="text-sm font-semibold text-brand-sky"
-                      href="https://rumiint.com"
+                      href={siteUrl}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      rumiint.com
+                      {siteDomain}
                     </a>
                   </div>
 
@@ -173,7 +174,7 @@ export default function Footer() {
             style={{ borderColor: 'var(--border)', color: 'var(--text-soft)' }}
           >
             <p className="flex flex-wrap items-center gap-2">
-              <span dir="ltr">{`© ${copyrightYears}`}</span>
+              <span dir="ltr">{`(c) ${copyrightYears}`}</span>
               <span>{t('footer.rightsReserved')}</span>
             </p>
             <div className="flex flex-wrap items-center gap-3">

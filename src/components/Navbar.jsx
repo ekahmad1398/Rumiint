@@ -5,14 +5,15 @@ import { FiGlobe, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi'
 
 import OptimizedImage from './OptimizedImage'
 import { useLanguage } from '../contexts/LanguageContext'
+import { portalUrl, routes } from '../siteConfig'
 import { useTheme } from '../contexts/ThemeContext'
 
 const navItems = [
-  { path: '/', key: 'home' },
-  { path: '/about', key: 'about' },
-  { path: '/photos', key: 'gallery' },
-  { path: '/events', key: 'events' },
-  { path: '/faq', key: 'faq' },
+  { path: routes.home, key: 'home' },
+  { path: routes.about, key: 'about' },
+  { path: routes.gallery, key: 'gallery' },
+  { path: routes.events, key: 'events' },
+  { path: routes.faq, key: 'faq' },
 ]
 
 const mobileMenuTransition = {
@@ -128,7 +129,7 @@ export default function Navbar() {
 
             <a
               className="portal-button"
-              href="https://portal.rumiint.com"
+              href={portalUrl}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -235,7 +236,7 @@ export default function Navbar() {
 
                 <motion.a
                   className="portal-button mt-4 w-full"
-                  href="https://portal.rumiint.com"
+                  href={portalUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                   variants={{

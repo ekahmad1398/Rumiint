@@ -10,11 +10,15 @@
   </url>
 
   <url>
-    <loc>https://rumi.edu.af/programs</loc>
+    <loc>https://rumi.edu.af/photos</loc>
   </url>
 
   <url>
-    <loc>https://rumi.edu.af/news</loc>
+    <loc>https://rumi.edu.af/events</loc>
+  </url>
+
+  <url>
+    <loc>https://rumi.edu.af/faq</loc>
   </url>
 
 </urlset>

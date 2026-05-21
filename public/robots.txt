@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rumischool.af/sitemap.xml
+Sitemap: https://rumi.edu.af/sitemap.xml

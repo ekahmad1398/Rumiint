@@ -12,6 +12,7 @@ import OptimizedImage from '../components/OptimizedImage'
 import { Reveal, Stagger } from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import { useLanguage } from '../contexts/LanguageContext'
+import { portalUrl, routes } from '../siteConfig'
 
 const ratioClasses = {
   portrait: 'aspect-auto sm:aspect-[4/5]',
@@ -92,14 +93,14 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 className="portal-button gap-2"
-                href="https://portal.rumiint.com"
+                href={portalUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {t('home.primaryButton')}
                 <FiExternalLink className="h-4 w-4" />
               </a>
-              <Link className="secondary-button gap-2" to="/photos">
+              <Link className="secondary-button gap-2" to={routes.gallery}>
                 {t('home.secondaryButton')}
                 <FiArrowRight className="h-4 w-4" />
               </Link>
@@ -294,13 +295,13 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   className="portal-button"
-                  href="https://portal.rumiint.com"
+                  href={portalUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   {t('nav.portal')}
                 </a>
-                <Link className="secondary-button" to="/events">
+                <Link className="secondary-button" to={routes.events}>
                   {t('nav.events')}
                 </Link>
               </div>
