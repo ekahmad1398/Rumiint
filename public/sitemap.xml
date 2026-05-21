@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://rumischool.af/</loc></url>
-  <url><loc>https://rumischool.af/about</loc></url>
-  <url><loc>https://rumischool.af/programs</loc></url>
-  <url><loc>https://rumischool.af/news</loc></url>
-  <url><loc>https://rumischool.af/photos</loc></url>
-  <url><loc>https://rumischool.af/teachers</loc></url>
-  <url><loc>https://rumischool.af/events</loc></url>
-  <url><loc>https://rumischool.af/admissions</loc></url>
-  <url><loc>https://rumischool.af/contact</loc></url>
-  <url><loc>https://rumischool.af/faq</loc></url>
+
+  <url>
+    <loc>https://rumi.edu.af/</loc>
+  </url>
+
+  <url>
+    <loc>https://rumi.edu.af/about</loc>
+  </url>
+
+  <url>
+    <loc>https://rumi.edu.af/programs</loc>
+  </url>
+
+  <url>
+    <loc>https://rumi.edu.af/news</loc>
+  </url>
+
 </urlset>
