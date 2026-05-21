@@ -1059,6 +1059,47 @@
     color: #e6627d;
     filter: drop-shadow(0 4px 10px rgba(214, 82, 109, 0.2));
   }
+
+  .fallback-scene-orbit {
+    animation: fallback-orbit 14s linear infinite;
+    transform-origin: center;
+  }
+
+  .fallback-scene-panel {
+    animation: fallback-panel-float 5.4s var(--ease-smooth) infinite;
+    will-change: transform;
+  }
+
+  .fallback-figure {
+    will-change: transform;
+  }
+
+  .fallback-figure-left {
+    animation: fallback-figure-bob 3.8s var(--ease-smooth) infinite;
+  }
+
+  .fallback-figure-right {
+    animation: fallback-figure-bob 4.4s var(--ease-smooth) infinite reverse;
+  }
+
+  .fallback-figure-wave,
+  .fallback-figure-reach,
+  .fallback-figure-book {
+    transform-box: fill-box;
+    transform-origin: center top;
+  }
+
+  .fallback-figure-wave {
+    animation: fallback-figure-wave 2.8s ease-in-out infinite;
+  }
+
+  .fallback-figure-reach {
+    animation: fallback-figure-reach 3.2s ease-in-out infinite;
+  }
+
+  .fallback-figure-book {
+    animation: fallback-figure-book 3.6s ease-in-out infinite;
+  }
 }
 
 @keyframes page-enter {
@@ -1169,6 +1210,79 @@
   to {
     opacity: 0;
     transform: translateY(-3px);
+  }
+}
+
+@keyframes fallback-orbit {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes fallback-panel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes fallback-figure-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fallback-figure-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(8deg);
+  }
+
+  55% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes fallback-figure-reach {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  40% {
+    transform: rotate(-8deg) translateY(-1px);
+  }
+
+  72% {
+    transform: rotate(5deg) translateY(1px);
+  }
+}
+
+@keyframes fallback-figure-book {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-2px) rotate(-4deg);
   }
 }
 

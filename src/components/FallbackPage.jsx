@@ -110,6 +110,50 @@ function FallbackIcon({ type, className = 'h-11 w-11 sm:h-12 sm:w-12' }) {
   )
 }
 
+function FallbackFigure({ side, isDark }) {
+  const skin = isDark ? '#f2c9a5' : '#efc8a4'
+  const outline = isDark ? '#e8efff' : '#0f1e4a'
+  const uniform = side === 'left' ? 'var(--accent)' : 'var(--accent-warm)'
+  const uniformAlt = side === 'left' ? '#74d0e3' : '#e8b04f'
+  const paper = isDark ? 'rgba(232, 239, 255, 0.94)' : 'rgba(255, 255, 255, 0.98)'
+  const shadow = isDark ? 'rgba(2, 10, 24, 0.22)' : 'rgba(15, 30, 74, 0.14)'
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`fallback-figure absolute bottom-[4.6rem] z-[1] ${side === 'left' ? 'fallback-figure-left left-7' : 'fallback-figure-right right-7'}`}
+    >
+      <svg className="h-[5.1rem] w-[3.6rem]" viewBox="0 0 56 82">
+        <ellipse cx="28" cy="77" fill={shadow} opacity="0.6" rx="15" ry="4.5" />
+        <circle cx="28" cy="12" fill={skin} r="7.5" />
+        <path d="M22.5 22.5h11c4.8 0 8.8 4 8.8 8.8v13.9H13.7V31.3c0-4.8 4-8.8 8.8-8.8Z" fill={uniform} />
+        <path d="M19 48.2 15.2 68" stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        <path d="M37 48.2 40.8 68" stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        <path d="M19.6 67.6h-7.2" stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        <path d="M43.6 67.6h-7.2" stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        <g className={side === 'left' ? 'fallback-figure-wave' : 'fallback-figure-reach'}>
+          <path d={side === 'left' ? 'M18.2 31.6 8.8 43.4' : 'M36.4 31.6 46.5 24.8'} stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        </g>
+        <path d={side === 'left' ? 'M37.6 31.6 45.5 43.6' : 'M19.3 31.6 11.4 44'} stroke={outline} strokeLinecap="round" strokeWidth="4.2" />
+        <rect fill={uniformAlt} height="7.2" rx="3.6" width="13.4" x="21.3" y="21.8" />
+        {side === 'left' ? (
+          <g className="fallback-figure-book">
+            <rect fill={paper} height="12" rx="2.5" width="10.8" x="41.4" y="39.8" />
+            <path d="M44 43.5h5.6" stroke={outline} strokeLinecap="round" strokeWidth="1.5" />
+            <path d="M44 47.2h4.5" stroke={outline} strokeLinecap="round" strokeWidth="1.5" />
+          </g>
+        ) : (
+          <g className="fallback-figure-wave">
+            <circle cx="47.5" cy="23.8" fill={paper} r="4.2" />
+            <path d="M46.2 23.8h2.6" stroke={outline} strokeLinecap="round" strokeWidth="1.4" />
+            <path d="M47.5 22.5v2.6" stroke={outline} strokeLinecap="round" strokeWidth="1.4" />
+          </g>
+        )}
+      </svg>
+    </div>
+  )
+}
+
 function FallbackScene({ type, isDark, language }) {
   const frameStyle = isDark
     ? 'linear-gradient(180deg, rgba(16, 31, 56, 0.96), rgba(12, 24, 44, 0.92))'
@@ -160,14 +204,17 @@ function FallbackScene({ type, isDark, language }) {
 
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-5 h-28 w-28 -translate-x-1/2 rounded-full border border-dashed"
+        className="fallback-scene-orbit absolute left-1/2 top-5 h-28 w-28 -translate-x-1/2 rounded-full border border-dashed"
         style={{ borderColor: orbitStyle }}
       />
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-9 h-20 w-20 -translate-x-1/2 rounded-full border border-dashed"
-        style={{ borderColor: warmStyle }}
+        className="fallback-scene-orbit absolute left-1/2 top-9 h-20 w-20 -translate-x-1/2 rounded-full border border-dashed"
+        style={{ animationDuration: '18s', borderColor: warmStyle }}
       />
+
+      <FallbackFigure isDark={isDark} side="left" />
+      <FallbackFigure isDark={isDark} side="right" />
 
       <div
         className="absolute left-5 top-5 inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-extrabold tracking-[0.16em]"
@@ -208,7 +255,7 @@ function FallbackScene({ type, isDark, language }) {
       />
 
       <div
-        className="absolute inset-x-6 bottom-5 rounded-[1.75rem] border px-5 py-5"
+        className="fallback-scene-panel absolute inset-x-6 bottom-5 rounded-[1.75rem] border px-5 py-5"
         style={{
           background: panelStyle,
           borderColor: 'var(--border)',
