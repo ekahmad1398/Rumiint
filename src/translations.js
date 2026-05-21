@@ -784,6 +784,41 @@ export const en = {
     next: 'Next',
     previous: 'Previous',
   },
+  notFound: {
+    code: 'Error 404',
+    eyebrow: 'Page not found',
+    title: 'This page stepped out of the school corridor',
+    description: 'The address you opened does not point to an active page on the Rumi website.',
+    body: 'You can return to the homepage, continue to the gallery, or explore current school events from the shortcuts below.',
+    requestedPath: 'Requested path',
+    primaryButton: 'Back Home',
+    secondaryButton: 'Open Gallery',
+    visualEyebrow: 'Still close',
+    visualTitle: 'Most visitors continue from here in just one click',
+    visualDescription:
+      'If you were looking for school life, photos, or the latest highlights, the links below will get you back on track quickly.',
+    imageAlt: 'A group of Rumi students gathered together during a school celebration.',
+    quickLinksEyebrow: 'Helpful shortcuts',
+    quickLinksTitle: 'Continue somewhere useful',
+    quickLinksDescription: 'These are the quickest paths back into the main parts of the website.',
+    quickLinks: [
+      {
+        title: 'Home',
+        description: 'Return to the main welcome page and see the school overview.',
+        cta: 'Go Home',
+      },
+      {
+        title: 'Gallery',
+        description: 'Browse classroom moments, events, and student recognition.',
+        cta: 'View Photos',
+      },
+      {
+        title: 'Events',
+        description: 'See ceremonies, celebrations, and recent school highlights.',
+        cta: 'See Events',
+      },
+    ],
+  },
   home: {
     badge: 'Admissions Open for 2026',
     title: 'Welcome to Rumi International School',
@@ -1003,6 +1038,41 @@ export const fa = {
     all: 'همه',
     next: 'بعدی',
     previous: 'قبلی',
+  },
+  notFound: {
+    code: 'خطای ۴۰۴',
+    eyebrow: 'صفحه یافت نشد',
+    title: 'این صفحه از مسیر وب‌سایت رومی بیرون رفته است',
+    description: 'آدرسی که باز کرده‌اید به یکی از صفحه‌های فعال وب‌سایت رومی اشاره نمی‌کند.',
+    body: 'می‌توانید به خانه برگردید، گالری را ببینید یا از راه‌های میان‌بر زیر به بخش‌های مهم برسید.',
+    requestedPath: 'مسیر درخواست‌شده',
+    primaryButton: 'بازگشت به خانه',
+    secondaryButton: 'باز کردن گالری',
+    visualEyebrow: 'هنوز نزدیکید',
+    visualTitle: 'بیشتر بازدیدکننده‌ها از اینجا با یک کلیک ادامه می‌دهند',
+    visualDescription:
+      'اگر دنبال زندگی آموزشی، تصویرها یا تازه‌ترین رویدادها بودید، لینک‌های زیر شما را زود به مسیر درست برمی‌گرداند.',
+    imageAlt: 'گروهی از شاگردان رومی در یکی از برنامه‌های مکتب در کنار یکدیگر گرد آمده‌اند.',
+    quickLinksEyebrow: 'میان‌برهای کاربردی',
+    quickLinksTitle: 'به یک بخش مفید ادامه بدهید',
+    quickLinksDescription: 'این‌ها سریع‌ترین راه‌ها برای بازگشت به بخش‌های اصلی وب‌سایت هستند.',
+    quickLinks: [
+      {
+        title: 'خانه',
+        description: 'به صفحه‌ی اصلی برگردید و نمایی کلی از مکتب را ببینید.',
+        cta: 'رفتن به خانه',
+      },
+      {
+        title: 'گالری',
+        description: 'لحظه‌های صنفی، رویدادها و تقدیر از شاگردان را ببینید.',
+        cta: 'دیدن تصویرها',
+      },
+      {
+        title: 'رویدادها',
+        description: 'مراسم‌ها، جشن‌ها و برجسته‌ترین رویدادهای مکتب را مشاهده کنید.',
+        cta: 'دیدن رویدادها',
+      },
+    ],
   },
   home: {
     badge: 'ثبت‌نام ۲۰۲۶ باز است',

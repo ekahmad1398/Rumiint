@@ -10,7 +10,7 @@ import { useTheme } from '../contexts/ThemeContext'
 const navItems = [
   { path: '/', key: 'home' },
   { path: '/about', key: 'about' },
-  { path: '/gallery', key: 'gallery' },
+  { path: '/photos', key: 'gallery' },
   { path: '/events', key: 'events' },
   { path: '/faq', key: 'faq' },
 ]

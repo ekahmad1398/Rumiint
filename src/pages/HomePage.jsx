@@ -99,7 +99,7 @@ export default function HomePage() {
                 {t('home.primaryButton')}
                 <FiExternalLink className="h-4 w-4" />
               </a>
-              <Link className="secondary-button gap-2" to="/gallery">
+              <Link className="secondary-button gap-2" to="/photos">
                 {t('home.secondaryButton')}
                 <FiArrowRight className="h-4 w-4" />
               </Link>

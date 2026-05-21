@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import AboutPage from './pages/AboutPage'
@@ -7,6 +7,7 @@ import EventsPage from './pages/EventsPage'
 import FAQPage from './pages/FAQPage'
 import GalleryPage from './pages/GalleryPage'
 import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function ScrollToTop() {
   const location = useLocation()
@@ -26,10 +27,10 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/photos" element={<GalleryPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/faq" element={<FAQPage />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>
