@@ -4,6 +4,10 @@ Options -Indexes -MultiViews
   RewriteEngine On
   RewriteBase /
 
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
   RewriteRule ^index\.html$ - [L]
   RewriteRule ^gallery/?$ /photos [R=302,L,NC]
   RewriteRule ^programs/?$ /photos [R=302,L,NC]
