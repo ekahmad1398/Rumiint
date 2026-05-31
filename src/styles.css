@@ -1019,6 +1019,7 @@
     z-index: 1;
     width: 0.95rem;
     height: 0.95rem;
+    color: #c62845;
     animation: footer-heart-bloom 2s var(--ease-smooth) infinite;
   }
 
@@ -1033,11 +1034,11 @@
   }
 
   .footer-credit-link:hover::after {
-    animation-duration: 1.1s;
+    animation-duration: 0.8s;
   }
 
   .footer-credit-link:hover .footer-heart-icon {
-    animation-duration: 1.1s;
+    animation-duration: 0.8s;
   }
 
   .dark .footer-credit-link {
@@ -1128,25 +1129,23 @@
 
 @keyframes footer-heart-bloom {
   0%,
-  74%,
-  100% {
+  48% {
+    color: #c62845;
     transform: scale(1);
     filter: drop-shadow(0 0 0 rgba(241, 95, 127, 0));
   }
 
-  82% {
-    transform: scale(1.04);
-    filter: drop-shadow(0 0 5px rgba(166, 29, 52, 0.18));
-  }
-
-  88% {
+  50% {
+    color: #c62845;
     transform: scale(1.11);
     filter: drop-shadow(0 0 10px rgba(166, 29, 52, 0.32));
   }
 
-  94% {
-    transform: scale(1.02);
-    filter: drop-shadow(0 0 5px rgba(166, 29, 52, 0.14));
+  52%,
+  100% {
+    color: #d9d9d9;
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.14));
   }
 }
 

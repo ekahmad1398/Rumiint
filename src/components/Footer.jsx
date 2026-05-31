@@ -4,14 +4,21 @@ import {
   FaHeart,
   FaInstagram,
   FaMapMarkerAlt,
-  FaPhoneAlt,
+  FaWhatsapp,
   FaYoutube,
 } from 'react-icons/fa'
 
 import OptimizedImage from './OptimizedImage'
 import { Reveal, Stagger } from './Reveal'
 import { useLanguage } from '../contexts/LanguageContext'
-import { contactEmail, siteDomain, siteUrl } from '../siteConfig'
+import {
+  contactEmail,
+  contactGmailUrl,
+  contactPhoneDisplay,
+  contactWhatsAppUrl,
+  siteDomain,
+  siteUrl,
+} from '../siteConfig'
 
 const socialLinks = [
   {
@@ -67,14 +74,19 @@ export default function Footer() {
 
               <div className="grid gap-4 md:grid-cols-2">
                 <Reveal delay={0.12}>
-                  <a className="surface-card footer-info-card flex items-center gap-4 p-4" href="tel:+93788979899">
+                  <a
+                    className="surface-card footer-info-card flex items-center gap-4 p-4"
+                    href={contactWhatsAppUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     <span className="icon-button h-12 w-12 shrink-0">
-                      <FaPhoneAlt />
+                      <FaWhatsapp />
                     </span>
                     <div>
                       <p className="text-sm font-bold">{t('footer.phoneLabel')}</p>
                       <p className="text-sm" style={{ color: 'var(--text-soft)' }}>
-                        +93 78 897 9899
+                        {contactPhoneDisplay}
                       </p>
                     </div>
                   </a>
@@ -83,7 +95,9 @@ export default function Footer() {
                 <Reveal delay={0.16}>
                   <a
                     className="surface-card footer-info-card flex items-center gap-4 p-4"
-                    href={`mailto:${contactEmail}`}
+                    href={contactGmailUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     <span className="icon-button h-12 w-12 shrink-0">
                       <FaEnvelope />
