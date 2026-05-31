@@ -10,7 +10,7 @@ export const routes = Object.freeze({
 })
 
 export const siteDomain = 'rumi.edu.af'
-export const portalname = 'rumiint.com'
+export const portalname = 'portal.rumiint.com'
 export const siteUrl = `https://${siteDomain}`
 export const portalUrl = `https://${portalname}`
 export const contactEmail = `info@${siteDomain}`
